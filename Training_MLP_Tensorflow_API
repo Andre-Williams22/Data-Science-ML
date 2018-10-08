@@ -1,0 +1,26 @@
+#FNN for MNIST using tf.learn 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
+
+import numpy as np
+import tensorflow as tf
+
+# supress 'monitor' warnings...
+# https://www.tensorflow.org/get_started/monitors
+tf.logging.set_verbosity(tf.logging.ERROR)
+from tensorflow.examples.tutorials.mnist import input_data
+mnist = input_data.read_data_sets("/tmp/data/")
+X_train = mnist.train.images
+X_test = mnist.test.images
+y_train = mnist.train.labels.astype("int")
+y_test = mnist.test.labels.astype("int")
+
+
+import tensorflow as tf
+
+feature_columns = tf.contrib.learn.infer_real_valued_columns_from_input(X_train)
+dnn_clf = tf.contrib.learn.DNNClassifier(hidden_units=[300, 100], n_classes=10,
+                                         feature_columns=feature_columns)
+dnn_clf.fit(x=X_train, y=y_train, batch_size=50, steps=40000)
+
+
