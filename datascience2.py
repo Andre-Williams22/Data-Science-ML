@@ -20,6 +20,8 @@ for tweet in public_tweets:
 	print(analysis.sentiment)
 	print("")
 
+# Polarity = how positive or negative a subject is from -1 to 1 and 0 is neutral
+# Subjectivity = how much of an opinion it is versus how factual 0 - 1
 
 
 
